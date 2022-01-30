@@ -28,12 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.SearchByIDTextbox = new System.Windows.Forms.TextBox();
-            this.SearchByIdBtn = new System.Windows.Forms.PictureBox();
             this.SearchByPhoneTextbox = new System.Windows.Forms.TextBox();
-            this.SearchByPhoneBtn = new System.Windows.Forms.PictureBox();
             this.MembersDataGridView = new System.Windows.Forms.DataGridView();
             this.MemberPanel = new System.Windows.Forms.Panel();
             this.Membershipbox = new System.Windows.Forms.ComboBox();
@@ -61,24 +59,26 @@
             this.PhoneNo = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
-            this.UserProfileImage = new System.Windows.Forms.PictureBox();
             this.label22 = new System.Windows.Forms.Label();
             this.totallabel = new System.Windows.Forms.Label();
             this.removebtn = new System.Windows.Forms.Button();
             this.updatebtn = new System.Windows.Forms.Button();
-            this.Refreshbox = new System.Windows.Forms.PictureBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.totalmemberslabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.SearchByIdBtn)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SearchByPhoneBtn)).BeginInit();
+            this.Refreshbox = new System.Windows.Forms.PictureBox();
+            this.UserProfileImage = new System.Windows.Forms.PictureBox();
+            this.SearchByPhoneBtn = new System.Windows.Forms.PictureBox();
+            this.SearchByIdBtn = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.MembersDataGridView)).BeginInit();
             this.MemberPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.UserProfileImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Refreshbox)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Refreshbox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.UserProfileImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SearchByPhoneBtn)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SearchByIdBtn)).BeginInit();
             this.SuspendLayout();
             // 
             // SearchByIDTextbox
@@ -92,19 +92,6 @@
             this.SearchByIDTextbox.Text = "Search by ID";
             this.SearchByIDTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SearchByIDTextbox_KeyPress);
             // 
-            // SearchByIdBtn
-            // 
-            this.SearchByIdBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(51)))), ((int)(((byte)(53)))));
-            this.SearchByIdBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.SearchByIdBtn.Image = global::GymManagement.Properties.Resources.search_3_64__1_;
-            this.SearchByIdBtn.Location = new System.Drawing.Point(172, 11);
-            this.SearchByIdBtn.Name = "SearchByIdBtn";
-            this.SearchByIdBtn.Size = new System.Drawing.Size(40, 23);
-            this.SearchByIdBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.SearchByIdBtn.TabIndex = 3;
-            this.SearchByIdBtn.TabStop = false;
-            this.SearchByIdBtn.Click += new System.EventHandler(this.SearchByIdBtn_Click);
-            // 
             // SearchByPhoneTextbox
             // 
             this.SearchByPhoneTextbox.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -116,19 +103,6 @@
             this.SearchByPhoneTextbox.Text = "Search by PhoneNo";
             this.SearchByPhoneTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SearchByPhoneTextbox_KeyPress);
             // 
-            // SearchByPhoneBtn
-            // 
-            this.SearchByPhoneBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(51)))), ((int)(((byte)(53)))));
-            this.SearchByPhoneBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.SearchByPhoneBtn.Image = global::GymManagement.Properties.Resources.search_3_64__1_;
-            this.SearchByPhoneBtn.Location = new System.Drawing.Point(398, 11);
-            this.SearchByPhoneBtn.Name = "SearchByPhoneBtn";
-            this.SearchByPhoneBtn.Size = new System.Drawing.Size(40, 23);
-            this.SearchByPhoneBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.SearchByPhoneBtn.TabIndex = 3;
-            this.SearchByPhoneBtn.TabStop = false;
-            this.SearchByPhoneBtn.Click += new System.EventHandler(this.SearchByPhoneBtn_Click);
-            // 
             // MembersDataGridView
             // 
             this.MembersDataGridView.AllowUserToAddRows = false;
@@ -136,22 +110,22 @@
             this.MembersDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.MembersDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(51)))), ((int)(((byte)(53)))));
             this.MembersDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.MembersDataGridView.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.MembersDataGridView.DefaultCellStyle = dataGridViewCellStyle3;
             this.MembersDataGridView.Location = new System.Drawing.Point(3, 242);
             this.MembersDataGridView.Name = "MembersDataGridView";
             this.MembersDataGridView.ReadOnly = true;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            this.MembersDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
+            this.MembersDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.MembersDataGridView.RowTemplate.Height = 25;
             this.MembersDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.MembersDataGridView.Size = new System.Drawing.Size(726, 199);
@@ -445,18 +419,6 @@
             this.label20.TabIndex = 2;
             this.label20.Text = "Email ID :";
             // 
-            // UserProfileImage
-            // 
-            this.UserProfileImage.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.UserProfileImage.Image = global::GymManagement.Properties.Resources.DefaultImage;
-            this.UserProfileImage.Location = new System.Drawing.Point(3, 3);
-            this.UserProfileImage.Name = "UserProfileImage";
-            this.UserProfileImage.Size = new System.Drawing.Size(100, 114);
-            this.UserProfileImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.UserProfileImage.TabIndex = 0;
-            this.UserProfileImage.TabStop = false;
-            this.UserProfileImage.Click += new System.EventHandler(this.UserProfileImage_Click);
-            // 
             // label22
             // 
             this.label22.AutoSize = true;
@@ -510,18 +472,6 @@
             this.updatebtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.updatebtn.UseVisualStyleBackColor = false;
             this.updatebtn.Click += new System.EventHandler(this.updatebtn_Click);
-            // 
-            // Refreshbox
-            // 
-            this.Refreshbox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Refreshbox.Image = global::GymManagement.Properties.Resources.refresh;
-            this.Refreshbox.Location = new System.Drawing.Point(456, 6);
-            this.Refreshbox.Name = "Refreshbox";
-            this.Refreshbox.Size = new System.Drawing.Size(26, 27);
-            this.Refreshbox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.Refreshbox.TabIndex = 18;
-            this.Refreshbox.TabStop = false;
-            this.Refreshbox.Click += new System.EventHandler(this.Refreshbox_Click);
             // 
             // label7
             // 
@@ -580,6 +530,56 @@
             this.totalmemberslabel.TabIndex = 25;
             this.totalmemberslabel.Text = "00";
             // 
+            // Refreshbox
+            // 
+            this.Refreshbox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Refreshbox.Image = global::GymManagement.Properties.Resources.refresh;
+            this.Refreshbox.Location = new System.Drawing.Point(456, 6);
+            this.Refreshbox.Name = "Refreshbox";
+            this.Refreshbox.Size = new System.Drawing.Size(26, 27);
+            this.Refreshbox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.Refreshbox.TabIndex = 18;
+            this.Refreshbox.TabStop = false;
+            this.Refreshbox.Click += new System.EventHandler(this.Refreshbox_Click);
+            // 
+            // UserProfileImage
+            // 
+            this.UserProfileImage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.UserProfileImage.Image = global::GymManagement.Properties.Resources.DefaultImage;
+            this.UserProfileImage.Location = new System.Drawing.Point(3, 3);
+            this.UserProfileImage.Name = "UserProfileImage";
+            this.UserProfileImage.Size = new System.Drawing.Size(100, 114);
+            this.UserProfileImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.UserProfileImage.TabIndex = 0;
+            this.UserProfileImage.TabStop = false;
+            this.UserProfileImage.Click += new System.EventHandler(this.UserProfileImage_Click);
+            // 
+            // SearchByPhoneBtn
+            // 
+            this.SearchByPhoneBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(51)))), ((int)(((byte)(53)))));
+            this.SearchByPhoneBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.SearchByPhoneBtn.Image = global::GymManagement.Properties.Resources.search_3_64__1_;
+            this.SearchByPhoneBtn.Location = new System.Drawing.Point(398, 11);
+            this.SearchByPhoneBtn.Name = "SearchByPhoneBtn";
+            this.SearchByPhoneBtn.Size = new System.Drawing.Size(40, 23);
+            this.SearchByPhoneBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.SearchByPhoneBtn.TabIndex = 3;
+            this.SearchByPhoneBtn.TabStop = false;
+            this.SearchByPhoneBtn.Click += new System.EventHandler(this.SearchByPhoneBtn_Click);
+            // 
+            // SearchByIdBtn
+            // 
+            this.SearchByIdBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(51)))), ((int)(((byte)(53)))));
+            this.SearchByIdBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.SearchByIdBtn.Image = global::GymManagement.Properties.Resources.search_3_64__1_;
+            this.SearchByIdBtn.Location = new System.Drawing.Point(172, 11);
+            this.SearchByIdBtn.Name = "SearchByIdBtn";
+            this.SearchByIdBtn.Size = new System.Drawing.Size(40, 23);
+            this.SearchByIdBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.SearchByIdBtn.TabIndex = 3;
+            this.SearchByIdBtn.TabStop = false;
+            this.SearchByIdBtn.Click += new System.EventHandler(this.SearchByIdBtn_Click);
+            // 
             // ViewMembers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -599,15 +599,15 @@
             this.Name = "ViewMembers";
             this.Size = new System.Drawing.Size(732, 471);
             this.Load += new System.EventHandler(this.ViewMembers_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.SearchByIdBtn)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SearchByPhoneBtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MembersDataGridView)).EndInit();
             this.MemberPanel.ResumeLayout(false);
             this.MemberPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.UserProfileImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Refreshbox)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Refreshbox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.UserProfileImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SearchByPhoneBtn)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SearchByIdBtn)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

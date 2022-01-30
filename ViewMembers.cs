@@ -30,6 +30,7 @@ namespace GymManagement
             }
         }
 
+        public DateTime renewalDate;
         public int oldAmount = 0;
         public ViewMembers()
         {
@@ -382,22 +383,38 @@ namespace GymManagement
         //auto select renewal date depending on membership type
         private void Membershipbox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int days = 0;
+          
             if (Membershipbox.SelectedIndex == 0)
             {
-                renewalDatepicker.Value = todaysDatepicker.Value.AddDays(30);
-
+                days = 30;
+                //renewalDatepicker.Value = todaysDatepicker.Value.AddDays(30);
             }
             if (Membershipbox.SelectedIndex == 1)
             {
-                renewalDatepicker.Value = todaysDatepicker.Value.AddDays(90);
+                days = 90;
             }
             if (Membershipbox.SelectedIndex == 2)
             {
-                renewalDatepicker.Value = todaysDatepicker.Value.AddDays(160);
+                days = 160;
             }
             if (Membershipbox.SelectedIndex == 3)
             {
-                renewalDatepicker.Value = todaysDatepicker.Value.AddDays(365);
+                days = 365;
+            }
+
+            DateTime todayDate = DateTime.Now.Date;
+            int remainingDays = Convert.ToInt32((renewalDate - todayDate).TotalDays);
+            if (remainingDays < 0)
+            {
+                int extraDays = Math.Abs(remainingDays);
+                int totalDays = days - extraDays;
+                renewalDatepicker.Value = renewalDate.AddDays(totalDays);
+            }
+            else
+            {
+                int totalDays = days;
+                renewalDatepicker.Value = renewalDate.AddDays(totalDays);
             }
         }
 
@@ -469,7 +486,7 @@ namespace GymManagement
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = this.MembersDataGridView.Rows[e.RowIndex];
-
+                renewalDate = Convert.ToDateTime(row.Cells["RenewalDate"].Value);
                 MemberID.Text = row.Cells["MemberID"].Value.ToString();
                 MemberName.Text = row.Cells["Name"].Value.ToString();
                 FatherName.Text = row.Cells["FatherName"].Value.ToString();
@@ -487,7 +504,7 @@ namespace GymManagement
                 //var stream = new MemoryStream(data);
                 //UserProfileImage.Image = Image.FromStream(stream);
                 oldAmount = Convert.ToInt32(row.Cells["FeePaid"].Value);
-
+               
             }
         }
 
@@ -520,5 +537,7 @@ namespace GymManagement
             }
             return income;
         }
+
+       
     }
 }
