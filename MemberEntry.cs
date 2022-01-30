@@ -14,18 +14,53 @@ namespace GymManagement
 {
     public partial class MemberEntry : Form
     {
+        static string constr = ConfigurationManager.ConnectionStrings["GMSDB"].ConnectionString;
+        SqlConnection con = new SqlConnection(constr);
+
         public MemberEntry()
         {
             InitializeComponent();
         }
 
-        string constr = ConfigurationManager.ConnectionStrings["GMSDB"].ConnectionString;
 
-        private void SearchByIdBtn_Click(object sender, EventArgs e)
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+
+        private void resetsearchboxes()
+        {
+            SearchByIDTextbox.Clear();
+           
+            SearchByIDTextbox.ForeColor = Color.DarkGray;
+            SearchByPhoneTextbox.Clear();
+            SearchByPhoneTextbox.ForeColor = Color.DarkGray;
+        }
+
+        private void MemberIDLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        public void SearchbyID()
         {
             if (SearchByIDTextbox.Text == string.Empty)
             {
-                MessageBox.Show("Please enter Member ID to Search");
+                msgBox.ForeColor = Color.Yellow;
+                msgBox.Text = "Please enter Member ID to Search";
+                //MessageBox.Show("Please enter Member ID to Search");
             }
             else
             {
@@ -51,166 +86,150 @@ namespace GymManagement
                         }
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    if(ex.Message == "Invalid attempt to read when no data is present.")
+                    if (ex.Message == "Invalid attempt to read when no data is present.")
                     {
-                        MessageBox.Show("No Member data found!");
+                        msgBox.ForeColor = Color.Yellow;
+                        msgBox.Text = "No Member data found!";
+                        //MessageBox.Show("No Member data found!");
                     }
                     else
                     {
-                        MessageBox.Show(ex.Message);
+                        msgBox.ForeColor = Color.Red;
+                        msgBox.Text = ex.Message;
+                        //MessageBox.Show(ex.Message);
                     }
                 }
-               
+
             }
         }
 
-        private void pictureBox3_Click(object sender, EventArgs e)
+        public void MemberCheckIN()
         {
-            WindowState = FormWindowState.Minimized;
-        }
+            int status = 0;
+            SqlDataAdapter sda = new SqlDataAdapter("Select status from memberentry Where memberid = '" + Convert.ToInt32(MemberIDLabel.Text) + "' and adddatetime = '" + DateTime.Now.Date + "'", con);
 
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+            con.Open();
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            con.Close();
 
-        private void InButton_Click(object sender, EventArgs e)
-        {
-            if (MemberIDLabel.Text == string.Empty)
+            if (dt.Rows.Count == 1)
             {
-                MessageBox.Show("Please enter Member ID or Phone Number to Search");
+                foreach (DataRow row in dt.Rows)
+                {
+                    status = Convert.ToInt32(row.ItemArray[0]);
+                }
+            }
+
+            if (status == 2)
+            {
+                msgBox.ForeColor = Color.Green;
+                msgBox.Text = "Your entries are already captured for the day!";
+                //MessageBox.Show("Your entries are already captured for the day!");
+            }
+            else if (status == 1)
+            {
+                MemberCheckOut();
             }
             else
             {
-                SqlConnection con2 = new SqlConnection(constr);
-
-                SqlDataAdapter sda1 = new SqlDataAdapter("Select id from memberentry Where memberid = '" + Convert.ToInt32( MemberIDLabel.Text) + "' and [status] in (1,2) and adddatetime = '" + DateTime.Now.Date + "'", con2);
-
-                con2.Open();
-                DataTable dt1 = new DataTable();
-                sda1.Fill(dt1);
-                con2.Close();
-
-                if (dt1.Rows.Count == 1)
+                try
                 {
-                    MessageBox.Show("You Already Check In");
+                    SqlCommand cmd = new SqlCommand("Insert into MemberEntry Values(@memberid, @status, @adddatetime, @intime, @outtime)", con);
+
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@memberid", Convert.ToInt32(MemberIDLabel.Text));
+                    cmd.Parameters.AddWithValue("@status", 1);
+                    cmd.Parameters.AddWithValue("@adddatetime", DateTime.Now.Date);
+                    cmd.Parameters.AddWithValue("@intime", Convert.ToString(DateTime.Now.TimeOfDay));
+                    cmd.Parameters.AddWithValue("@outtime", "");
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+
+                    //MessageBox.Show("Check In successfully");
+                    msgBox.ForeColor = Color.Green;
+                    msgBox.Text = "Check In successfully";
                     resetsearchboxes();
                 }
-                else
+                catch (Exception ex)
                 {
-                    try
-                    {
-                        SqlConnection con = new SqlConnection(constr);
-                        SqlCommand cmd = new SqlCommand("Insert into MemberEntry Values(@memberid, @status, @adddatetime, @intime, @outtime)", con);
-
-                        cmd.CommandType = CommandType.Text;
-                        cmd.Parameters.AddWithValue("@memberid", Convert.ToInt32(MemberIDLabel.Text));
-                        cmd.Parameters.AddWithValue("@status", 1);
-                        cmd.Parameters.AddWithValue("@adddatetime", DateTime.Now.Date);
-                        cmd.Parameters.AddWithValue("@intime", Convert.ToString( DateTime.Now.TimeOfDay));
-                        cmd.Parameters.AddWithValue("@outtime","");
-
-                        con.Open();
-                        cmd.ExecuteNonQuery();
-                        con.Close();
-
-                        MessageBox.Show("Check In successfully");
-                        resetsearchboxes();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
+                    msgBox.ForeColor = Color.Red;
+                    msgBox.Text = ex.Message;
+                    //MessageBox.Show(ex.Message);
                 }
             }
-        }
+        } 
 
-        private void OutButton_Click(object sender, EventArgs e)
+        public void MemberCheckOut()
         {
-            if (MemberIDLabel.Text == string.Empty)
+            try
             {
-                MessageBox.Show("Please enter Member ID or Phone Number to Search");
+                SqlCommand cmd = new SqlCommand("Update memberentry set outtime = @outtime, status = @status Where MemberID = @memberid  and adddatetime = '" + DateTime.Now.Date + "'", con);
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.AddWithValue("@memberid", Convert.ToInt32(MemberIDLabel.Text));
+                cmd.Parameters.AddWithValue("@status", 2);
+                cmd.Parameters.AddWithValue("@outtime", Convert.ToString(DateTime.Now.TimeOfDay));
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+                //MessageBox.Show("Check Out successfully");
+                msgBox.ForeColor = Color.Green;
+                msgBox.Text = "Check Out successfully";
+                resetsearchboxes();
             }
-            else
+            catch (Exception ex)
             {
-                SqlConnection con1 = new SqlConnection(constr);
-
-                SqlDataAdapter sda = new SqlDataAdapter("Select id, status from memberentry Where memberid LIKE '%" + MemberIDLabel.Text + "%' and [status] in (1,2) and adddatetime = '" + DateTime.Now.Date + "'", con1);
-
-                con1.Open();
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-                con1.Close();
-
-                int status = 0;
-                if (dt.Rows.Count == 0)
-                {
-                    MessageBox.Show("Please make CheckIn First");
-                }
-                else
-                {
-                    foreach (DataRow row in dt.Rows)
-                    {
-                        status = Convert.ToInt32(row.ItemArray[1]);
-                    }
-
-                    if (status == 2)
-                    {
-                        MessageBox.Show("You Already Check Out");
-                        resetsearchboxes();
-                    }
-                    else
-                    {
-                        try
-                        {
-                            SqlConnection con = new SqlConnection(constr);
-                            SqlCommand cmd = new SqlCommand("Update memberentry set outtime = @outtime, status = @status Where MemberID = @memberid  and adddatetime = '" + DateTime.Now.Date + "'", con);
-                            cmd.CommandType = CommandType.Text;
-                            cmd.Parameters.AddWithValue("@memberid", Convert.ToInt32(MemberIDLabel.Text));
-                            cmd.Parameters.AddWithValue("@status", 2);
-                            cmd.Parameters.AddWithValue("@outtime", Convert.ToString(DateTime.Now.TimeOfDay));
-
-                            con.Open();
-                            cmd.ExecuteNonQuery();
-                            con.Close();
-
-                            MessageBox.Show("Check Out successfully");
-                            resetsearchboxes();
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message);
-                        }
-                    }
-                }
+                msgBox.ForeColor = Color.Red;
+                msgBox.Text = ex.Message;
+                MessageBox.Show(ex.Message);
             }
         }
 
-        private void resetsearchboxes()
+        private void MemberEntry_Enter(object sender, EventArgs e)
         {
-            SearchByIDTextbox.Clear();
-            //SearchByIDTextbox.Text = "Search by ID";
-            SearchByIDTextbox.ForeColor = Color.DarkGray;
-            MemberIDLabel.ResetText();
-            MemberNameLabel.ResetText();
-            ExpiredDaysLabel.ResetText();
-            SearchByPhoneTextbox.Clear();
-            //SearchByPhoneTextbox.Text = "Search by PhoneNo";
-            SearchByPhoneTextbox.ForeColor = Color.DarkGray;
+          
         }
 
-        private void MemberIDLabel_Click(object sender, EventArgs e)
+        private void MemberEntry_Load(object sender, EventArgs e)
         {
-
+            this.ActiveControl = SearchByIDTextbox;
         }
 
-        private void SearchByPhoneBtn_Click(object sender, EventArgs e)
+        private void SearchByIDTextbox_Enter(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void SearchByIDTextbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar == (char)Keys.Enter)
+            {
+                SearchbyID();
+                MemberCheckIN();
+            }
+        }
+
+        private void SearchByPhoneTextbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                SearchByPhoneNo();
+            }
+        }
+
+        public void SearchByPhoneNo()
         {
             if (SearchByPhoneTextbox.Text == string.Empty)
             {
-                MessageBox.Show("Please enter PhoneNo to Search");
+                msgBox.ForeColor = Color.Yellow;
+                msgBox.Text = "Please enter PhoneNo to Search";
+                //MessageBox.Show("Please enter PhoneNo to Search");
             }
             else
             {
@@ -235,25 +254,25 @@ namespace GymManagement
                             con.Close();
                         }
                     }
+                    msgBox.Text = "";
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     if (ex.Message == "Invalid attempt to read when no data is present.")
                     {
-                        MessageBox.Show("No Member data found!");
+                        //MessageBox.Show("No Member data found!");
+                        msgBox.ForeColor = Color.Yellow;
+                        msgBox.Text = "No Member data found!";
                     }
                     else
                     {
-                        MessageBox.Show(ex.Message);
+                        msgBox.ForeColor = Color.Red;
+                        msgBox.Text = ex.Message;
+                        //MessageBox.Show(ex.Message);
                     }
                 }
 
             }
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
